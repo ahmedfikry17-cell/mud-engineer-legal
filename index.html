@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mud Engineer – offline mud calculations for the rig floor | Rig Floor Tech</title>
+<meta name="description" content="Mud Engineer Pro and Lite: 20 offline drilling-fluid calculators in field and metric units, with a 40-page technical reference. Mud Engineer Enterprise for companies: Daily Mud Report, chemical inventory and well recap.">
+<meta name="theme-color" content="#0d1217">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mud Engineer – mud calculations in your pocket">
+<meta property="og:description" content="20 offline drilling-fluid calculators for the rig floor. Now on Google Play. iOS coming soon.">
+<meta property="og:image" content="https://ahmedfikry17-cell.github.io/mud-engineer-legal/assets/og.jpg">
+<meta property="og:url" content="https://ahmedfikry17-cell.github.io/mud-engineer-legal/">
+<meta name="twitter:card" content="summary_large_image">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{--bg:#0d1217;--bg2:#121920;--panel:#161d25;--panel2:#1b242d;--line:#27313b;--amber:#cb820c;--amber-hi:#f0a21a;--amber-2:#d9a83c;--cream:#ece8d8;--sub:#c9c8c1;--muted:#8794a0;--ink:#10151a;--ok:#7fd08a;--r:14px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--sub);font:17px/1.6 Lato,Carlito,"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--amber-2)}
+img{max-width:100%;height:auto;display:block}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+:focus-visible{outline:3px solid var(--amber-hi);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--amber);color:var(--ink);padding:8px 14px;border-radius:6px;z-index:50}
+.skip:focus{left:8px}
+/* ---------- header ---------- */
+header.top{position:sticky;top:0;z-index:30;background:rgba(13,18,23,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:66px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--cream);text-decoration:none;font-weight:700}
+.brand img{width:38px;height:38px;border-radius:10px;box-shadow:0 0 0 1px rgba(255,255,255,.06),0 6px 18px rgba(203,130,12,.25)}
+nav{display:flex;align-items:center;gap:6px}
+nav a{color:var(--sub);text-decoration:none;padding:8px 12px;font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:8px}
+nav a:hover{color:var(--amber-hi);background:rgba(203,130,12,.08)}
+nav a.pill{background:var(--amber);color:var(--ink);margin-left:8px}
+nav a.pill:hover{background:var(--amber-hi);color:var(--ink)}
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:10px;font-weight:700;text-decoration:none;letter-spacing:.02em;border:2px solid transparent;transition:transform .18s,box-shadow .18s,background .18s}
+.btn svg{width:20px;height:20px;flex:none}
+.btn.primary{background:linear-gradient(180deg,#e0920f,#c97e08);color:var(--ink);box-shadow:0 10px 28px rgba(203,130,12,.32)}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(203,130,12,.45)}
+.btn.ghost{border-color:rgba(217,168,60,.7);color:var(--amber-2)}
+.btn.ghost:hover{background:rgba(203,130,12,.12);transform:translateY(-2px)}
+.btn.soon{border:2px dashed var(--line);color:var(--muted);cursor:default}
+.btn small{font-weight:700;color:var(--amber-hi);letter-spacing:.14em;font-size:11px}
+/* ---------- hero ---------- */
+.hero{position:relative;padding:64px 0 56px;overflow:hidden;isolation:isolate}
+.hero:before{content:"";position:absolute;inset:0;z-index:-2;background:
+  radial-gradient(900px 520px at 78% 30%,rgba(240,162,26,.20),transparent 60%),
+  radial-gradient(700px 480px at 8% 0%,rgba(203,130,12,.10),transparent 60%)}
+.hero:after{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse 80% 70% at 60% 40%,#000 30%,transparent 78%);mask-image:radial-gradient(ellipse 80% 70% at 60% 40%,#000 30%,transparent 78%)}
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.kicker{display:flex;align-items:center;gap:14px;color:var(--amber);font-weight:700;letter-spacing:.28em;text-transform:uppercase;font-size:13px}
+.kicker:before{content:"";width:44px;height:5px;background:var(--amber)}
+h1{margin:18px 0 20px;font-size:clamp(42px,6.4vw,82px);line-height:1;letter-spacing:-.6px;color:var(--cream);text-transform:uppercase}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--amber),var(--amber-hi));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:20px;max-width:32em}
+.lead strong{color:var(--cream)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.chips li{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--sub);border:1px solid var(--line);background:rgba(255,255,255,.03);padding:6px 12px;border-radius:999px}
+.stage{position:relative;display:flex;justify-content:center;align-items:flex-start;min-height:620px}
+.glow{position:absolute;left:50%;top:48%;width:420px;height:420px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(240,162,26,.35),transparent 66%);filter:blur(30px);z-index:0}
+.phone{position:relative;flex:none;border-radius:34px;padding:24px 8px 8px;background:linear-gradient(145deg,#2a3440,#0a0d10 40%,#1a222b);box-shadow:0 30px 60px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.08)}
+.phone:before{content:"";position:absolute;top:8px;left:50%;transform:translateX(-50%);width:24%;height:8px;border-radius:8px;background:#05070a;z-index:3;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.phone img{border-radius:20px;width:100%}
+.stage .phone{z-index:1}
+.stage .p1{width:34%;margin-right:-34px;transform:translateY(46px) rotate(-5deg)}
+.stage .p2{width:42%;z-index:3;animation:float 6s ease-in-out infinite}
+.stage .p3{width:34%;margin-left:-34px;transform:translateY(70px) rotate(5deg);z-index:2}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.tag{position:absolute;z-index:5;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:14px;background:rgba(22,29,37,.78);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 14px 30px rgba(0,0,0,.45);font-size:13px;color:var(--muted);line-height:1.25}
+.tag b{display:block;color:var(--cream);font-size:18px}
+.tag.t1{left:-2%;top:22%}.tag.t2{right:-2%;top:44%}.tag.t3{left:4%;bottom:6%}
+.tag.t1 b{color:var(--ok)}
+.tag svg{width:22px;height:22px;color:var(--amber-hi);flex:none}
+/* ---------- stats ---------- */
+.stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(180deg,var(--panel),var(--bg2))}
+.stats .wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding-top:26px;padding-bottom:26px;text-align:center}
+.stats b{display:block;font-size:clamp(28px,3.4vw,40px);line-height:1.1;background:linear-gradient(180deg,var(--amber-hi),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stats span{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+/* ---------- marquee ---------- */
+.marquee{overflow:hidden;border-bottom:1px solid var(--line);background:var(--bg);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:12px;width:max-content;padding:16px 0;animation:slide 60s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.track span{white-space:nowrap;padding:8px 16px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--cream);font-weight:700;font-size:15px}
+.track span:before{content:"";display:inline-block;width:8px;height:8px;background:var(--amber);margin-right:10px;border-radius:2px}
+@keyframes slide{to{transform:translateX(-50%)}}
+/* ---------- sections ---------- */
+section{padding:84px 0}
+h2{margin:0 0 12px;color:var(--cream);font-size:clamp(30px,4.2vw,46px);line-height:1.08;text-transform:uppercase;letter-spacing:-.3px}
+h2 em{font-style:normal;color:var(--amber)}
+p.sec{max-width:46em;margin:0 0 38px;font-size:18px}
+.grid{display:grid;gap:18px}.g3{grid-template-columns:repeat(3,1fr)}
+.card{position:relative;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--r);padding:26px;transition:transform .22s,border-color .22s,box-shadow .22s}
+.card:hover{transform:translateY(-4px);border-color:rgba(217,168,60,.55);box-shadow:0 18px 40px rgba(0,0,0,.4),0 0 0 1px rgba(217,168,60,.15)}
+.card .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(203,130,12,.14);color:var(--amber-hi);margin-bottom:16px}
+.card .ic svg{width:24px;height:24px}
+.card h3{margin:0 0 6px;color:var(--cream);font-size:20px}
+.card p{margin:0;font-size:16px}
+/* ---------- live demo ---------- */
+.demo{background:linear-gradient(180deg,var(--bg2),var(--bg));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.demo .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:center}
+.tog{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:4px;background:var(--panel);margin:6px 0 18px}
+.tog button{border:0;background:transparent;color:var(--sub);font:inherit;font-weight:700;letter-spacing:.06em;padding:8px 20px;border-radius:999px;cursor:pointer}
+.tog button[aria-pressed=true]{background:var(--amber);color:var(--ink)}
+.calc{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 30px 60px rgba(0,0,0,.4)}
+.calc h3{margin:0 0 14px;color:var(--cream);font-size:18px;display:flex;justify-content:space-between;gap:8px}
+.calc h3 small{color:var(--muted);font-weight:400;font-size:13px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.f label{display:block;font-size:13px;color:var(--muted);margin-bottom:4px}
+.f div{display:flex;align-items:center;background:#0f151b;border:1px solid var(--line);border-radius:10px;padding:0 12px}
+.f div:focus-within{border-color:var(--amber-hi);box-shadow:0 0 0 3px rgba(240,162,26,.18)}
+.f input{width:100%;background:transparent;border:0;color:var(--cream);font:700 20px/1 "Cascadia Mono",Consolas,"Liberation Mono",monospace;padding:13px 0;outline:0;min-width:0}
+.f em{font-style:normal;color:var(--amber-2);font-size:13px;font-weight:700;margin-left:6px}
+.out{margin-top:16px;border-top:1px solid var(--line);padding-top:6px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row span{color:var(--sub)}
+.row b{font:700 26px/1 "Cascadia Mono",Consolas,"Liberation Mono",monospace;color:var(--amber-hi)}
+.row b i{font-style:normal;font-size:13px;color:var(--muted);margin-left:6px}
+.row.ok b{color:var(--ok)}
+.pulse{animation:pulse .35s ease-out}
+@keyframes pulse{from{opacity:.4;transform:translateY(2px)}to{opacity:1;transform:none}}
+.mini{font-size:13px;color:var(--muted);margin-top:12px}
+/* ---------- gallery ---------- */
+.gal-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
+.arrows{display:flex;gap:8px}
+.arrows button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--cream);cursor:pointer;display:grid;place-items:center}
+.arrows button:hover{border-color:var(--amber-hi);color:var(--amber-hi)}
+.arrows svg{width:20px;height:20px}
+.gal{display:flex;gap:26px;overflow-x:auto;scroll-snap-type:x mandatory;padding:20px 24px 36px;margin:0 -24px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.gal figure{margin:0;flex:none;width:230px;scroll-snap-align:center}
+.gal figcaption{margin-top:14px;text-align:center;color:var(--cream);font-weight:700;font-size:15px}
+.gal figcaption small{display:block;color:var(--muted);font-weight:400;font-size:13px}
+.gal .phone{transition:transform .25s}
+.gal figure:hover .phone{transform:translateY(-6px)}
+/* ---------- calculators + table ---------- */
+.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cats h3{margin:0 0 8px;color:var(--amber);font-size:13px;letter-spacing:.2em;text-transform:uppercase}
+.cats ul{margin:0;padding:0;list-style:none}
+.cats li{padding:7px 0;border-bottom:1px solid var(--line);font-size:16px}
+.cats li:last-child{border-bottom:0}
+.cmp{width:100%;border-collapse:separate;border-spacing:0;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.cmp th,.cmp td{padding:16px 20px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.cmp th{color:var(--cream);font-size:14px;letter-spacing:.1em;text-transform:uppercase;background:var(--panel2)}
+.cmp th:last-child{color:var(--amber-hi)}
+.cmp tr:last-child td{border-bottom:0}
+.cmp td:first-child{color:var(--muted);width:32%}
+.yes{color:var(--ok);font-weight:700}
+/* ---------- enterprise ---------- */
+.ent{position:relative;background:radial-gradient(900px 500px at 15% 0%,rgba(203,130,12,.12),transparent 60%),linear-gradient(180deg,#121a21,#0d1217);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ent .wrap.two{display:grid;grid-template-columns:.8fr 1.2fr;gap:44px;align-items:start}
+.tabs{display:grid;gap:10px;margin:0 0 26px}
+.tab{text-align:left;border:1px solid var(--line);background:var(--panel);border-radius:var(--r);padding:16px 18px;color:var(--sub);font:inherit;cursor:pointer;transition:border-color .2s,background .2s}
+.tab b{display:block;color:var(--cream);font-size:18px;margin-bottom:2px}
+.tab[aria-selected=true]{border-color:var(--amber-hi);background:linear-gradient(180deg,#1f2a33,var(--panel));box-shadow:0 0 0 1px rgba(240,162,26,.25)}
+.extras{margin:0 0 26px;padding:0;list-style:none;display:grid;gap:8px}
+.extras li{position:relative;padding-left:24px}
+.extras li:before{content:"";position:absolute;left:0;top:.6em;width:10px;height:10px;background:var(--amber)}
+.extras b{color:var(--cream)}
+.win{border-radius:14px;overflow:hidden;background:#0a0e12;border:1px solid #2a3540;box-shadow:0 40px 80px rgba(0,0,0,.55)}
+.win .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;background:linear-gradient(180deg,#232d37,#1a222a);border-bottom:1px solid #2a3540}
+.win .bar i{width:12px;height:12px;border-radius:50%;background:#3a4650}
+.win .bar i:nth-child(1){background:#ff5f57}.win .bar i:nth-child(2){background:#febc2e}.win .bar i:nth-child(3){background:#28c840}
+.win .bar span{margin-left:12px;color:var(--muted);font-size:13px;letter-spacing:.04em}
+.win .view{--h:560px;position:relative;height:var(--h);background:radial-gradient(circle at 50% 30%,#1c2630,#0d1217);display:grid;place-items:center;padding:22px}
+.win .view figure{position:absolute;inset:22px;margin:0;display:grid;place-items:center;opacity:0;transform:scale(.98);transition:opacity .35s,transform .35s;pointer-events:none}
+.win .view figure.on{opacity:1;transform:none;pointer-events:auto}
+.win img{max-height:calc(var(--h) - 44px);max-width:100%;width:auto;border-radius:12px;box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.fine{margin-top:14px;font-size:14px;color:var(--muted)}
+/* ---------- faq ---------- */
+.faq{max-width:860px}
+details{border:1px solid var(--line);background:var(--panel);border-radius:var(--r);margin-bottom:12px;overflow:hidden}
+summary{cursor:pointer;list-style:none;padding:18px 22px;color:var(--cream);font-weight:700;font-size:18px;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--amber-hi);font-size:26px;line-height:1;transition:transform .2s}
+details[open] summary:after{transform:rotate(45deg)}
+details p{margin:0;padding:0 22px 20px}
+.disc{font-size:15px;color:var(--muted);max-width:52em}
+/* ---------- footer + sticky cta ---------- */
+footer{border-top:1px solid var(--line);padding:38px 0 60px;font-size:15px;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 40px}
+footer a{margin-right:18px}
+.sticky{position:fixed;left:12px;right:12px;bottom:12px;z-index:40;display:none;transform:translateY(140%);transition:transform .3s}
+.sticky.show{transform:none}
+.sticky a{display:flex;justify-content:center;width:100%;box-shadow:0 14px 34px rgba(0,0,0,.55)}
+/* ---------- reveal ---------- */
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.js .rv.in{opacity:1;transform:none}
+.js .rv.d1{transition-delay:.08s}.js .rv.d2{transition-delay:.16s}.js .rv.d3{transition-delay:.24s}
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+ .hero .wrap,.demo .wrap,.ent .wrap.two{grid-template-columns:1fr}
+ .stage{min-height:560px;margin-top:8px}
+ .stats .wrap{grid-template-columns:repeat(2,1fr);row-gap:18px}
+ .g3,.cats{grid-template-columns:1fr}
+ nav a:not(.pill){display:none}
+ .win .view{--h:520px}
+}
+@media (max-width:560px){
+ section{padding:60px 0}
+ .stage{min-height:500px}
+ .stage .p1,.stage .p3{width:36%}.stage .p2{width:46%}
+ .tag.t2{display:none}.tag.t1{left:0;top:14%}.tag.t3{left:0;bottom:2%}
+ .fields{grid-template-columns:1fr}
+ .sticky{display:block}
+ .win .view{--h:460px}
+}
+@media (prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ .track,.stage .p2{animation:none}
+ .js .rv{opacity:1;transform:none;transition:none}
+ .btn,.card,.gal .phone{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+  <a class="brand" href="#top"><img src="assets/icon.png" alt="" width="38" height="38"><span>Rig Floor Tech</span></a>
+  <nav aria-label="Main"><a href="#demo">Try it</a><a href="#screens">Screens</a><a href="#enterprise">Enterprise</a><a href="support.html">Support</a><a class="pill" href="https://play.google.com/store/apps/details?id=com.rigfloortech.mepro">Get Pro</a></nav>
+</div></header>
+
+<main id="main">
+<div id="top" class="hero"><div class="wrap">
+  <div>
+    <div class="kicker">Mud Engineer · Pro &amp; Lite</div>
+    <h1>Mud calculations,<br><em>in your pocket.</em></h1>
+    <p class="lead">Every mud engineering value you need, on the rig floor — <strong>offline</strong>, in field or metric units. From mud weight to cement jobs.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://play.google.com/store/apps/details?id=com.rigfloortech.mepro"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 3.2v17.6a1 1 0 0 0 1.5.9l15-8.8a1 1 0 0 0 0-1.8l-15-8.8A1 1 0 0 0 4 3.2z"/></svg>Mud Engineer Pro on Google Play</a>
+      <a class="btn ghost" href="https://play.google.com/store/apps/details?id=com.rigfloortech.mudengineerlite">Lite – free</a>
+      <span class="btn soon" aria-label="iOS version coming soon">iOS <small>COMING SOON</small></span>
+    </div>
+    <ul class="chips"><li>Works offline</li><li>US + Metric</li><li>10 languages</li><li>40-page reference</li></ul>
+  </div>
+  <div class="stage" aria-label="App screenshots">
+    <div class="glow"></div>
+    <div class="tag t1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 3l18 18M2 8.8a15 15 0 0 1 7.6-3.9M5 12.6a10 10 0 0 1 5-2.7M8.5 16.4a5 5 0 0 1 3-1.4M12 20h.01M16 6.1a15 15 0 0 1 6 2.7M19 10.4a10 10 0 0 1 2 1.7"/></svg><span>Zero signal<b>Fully offline</b></span></div>
+    <div class="tag t2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h13l-3-3M17 17H4l3 3"/></svg><span>ECD at TVD<b>12.13 ppg</b></span></div>
+    <div class="tag t3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14zM20 17v4H6.5"/></svg><span>Every formula<b>40-page PDF</b></span></div>
+    <div class="phone p1"><img src="assets/s1_home.jpg" alt="Mud Engineer home screen in dark mode with calculator search and categories" width="600" height="1298"></div>
+    <div class="phone p2"><img src="assets/s2_mw.jpg" alt="Mud Weight and Hydrostatic results with ECD, overbalance and HPHT density correction" width="600" height="1298"></div>
+    <div class="phone p3"><img src="assets/s3_hole.jpg" alt="Hole Cleaning results with annular velocity, transport ratio and cuttings concentration in light mode" width="600" height="1298"></div>
+  </div>
+</div></div>
+
+<div class="stats"><div class="wrap">
+  <div><b data-count="20">20</b><span>calculators</span></div>
+  <div><b data-count="40">40</b><span>page technical reference</span></div>
+  <div><b data-count="10">10</b><span>languages</span></div>
+  <div><b>US + SI</b><span>field and metric units</span></div>
+  <div><b data-count="0">0</b><span>signal needed</span></div>
+</div></div>
+
+<div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
+
+<section id="apps"><div class="wrap">
+  <h2 class="rv">Built for the <em>rig floor</em></h2>
+  <p class="sec rv">Fast, focused tools that work where the work is — no signal, no sign-in, no subscription.</p>
+  <div class="grid g3">
+    <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18M2 8.8a15 15 0 0 1 7.6-3.9M5 12.6a10 10 0 0 1 5-2.7M8.5 16.4a5 5 0 0 1 3-1.4M12 20h.01M16 6.1a15 15 0 0 1 6 2.7M19 10.4a10 10 0 0 1 2 1.7"/></svg></div><h3>Works offline</h3><p>No signal on the rig, no problem. The calculators run on your device and no data leaves it.</p></div>
+    <div class="card rv d1"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h13l-3-3M17 17H4l3 3"/></svg></div><h3>US and Metric, one tap</h3><p>Switch units from the header at any time. Your entries convert exactly and come back unchanged.</p></div>
+    <div class="card rv d2"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2c3 3 4.5 6.5 4.5 10S15 19 12 22C9 19 7.5 15.5 7.5 12S9 5 12 2z"/></svg></div><h3>10 languages</h3><p>Including Arabic, with the same calculators and the same results in every language.</p></div>
+    <div class="card rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></div><h3>Dark and light mode</h3><p>One tap on the sun or moon icon. Easy on the eyes for day and night shifts.</p></div>
+    <div class="card rv d1"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div><h3>Search any calculator</h3><p>Find a tool by name or term. Required and optional inputs are marked, and optional ones unlock extra results.</p></div>
+    <div class="card rv d2"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14zM20 17v4H6.5"/></svg></div><h3>Every formula documented</h3><p>Pro includes a 40-page technical reference with the equations, worked examples and references behind each calculator.</p></div>
+  </div>
+</div></section>
+
+<section id="demo" class="demo"><div class="wrap">
+  <div>
+    <h2 class="rv">Try it <em>right here</em></h2>
+    <p class="sec rv" style="margin-bottom:18px">This is the Mud Weight &amp; ECD calculator from the app, with the same formulas. Change a value, or switch units with one tap.</p>
+    <div class="tog rv" role="group" aria-label="Units"><button type="button" id="uUS" aria-pressed="true">US field</button><button type="button" id="uSI" aria-pressed="false">Metric</button></div>
+    <p class="mini rv">The apps have 20 calculators, history, a technical reference and 10 languages. This demo is for illustration only.</p>
+  </div>
+  <div class="calc rv d1" role="group" aria-label="Mud Weight and ECD demo">
+    <h3>Mud Weight &amp; ECD <small>demo</small></h3>
+    <div class="fields">
+      <div class="f"><label for="iMW" id="lMW">Mud weight</label><div><input id="iMW" inputmode="decimal" autocomplete="off"><em id="eMW">ppg</em></div></div>
+      <div class="f"><label for="iTVD">True vertical depth</label><div><input id="iTVD" inputmode="decimal" autocomplete="off"><em id="eTVD">ft</em></div></div>
+      <div class="f"><label for="iAFP">Annular friction loss</label><div><input id="iAFP" inputmode="decimal" autocomplete="off"><em id="eAFP">psi</em></div></div>
+      <div class="f"><label for="iPP" id="lPP">Pore gradient</label><div><input id="iPP" inputmode="decimal" autocomplete="off"><em id="ePP">ppg</em></div></div>
+    </div>
+    <div class="out" aria-live="polite">
+      <div class="row"><span>Hydrostatic pressure</span><b id="oHP">–</b></div>
+      <div class="row ok"><span>Equivalent circulating density</span><b id="oECD">–</b></div>
+      <div class="row"><span>Overbalance</span><b id="oOB">–</b></div>
+    </div>
+    <p class="mini">Hydrostatic = 0.052 × MW × TVD. ECD = MW + AFP ÷ (0.052 × TVD). Overbalance = 0.052 × (MW − pore gradient) × TVD.</p>
+  </div>
+</div></section>
+
+<section id="screens"><div class="wrap">
+  <div class="gal-head">
+    <div><h2 class="rv">Real screens, <em>real results</em></h2><p class="sec rv" style="margin-bottom:0">Screenshots from the app, with example values. Dark or light, as you prefer.</p></div>
+    <div class="arrows" aria-label="Scroll the screenshots"><button type="button" id="gPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" id="gNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button></div>
+  </div>
+  <div class="gal" id="gal" tabindex="0" aria-label="App screenshots">
+    <figure><div class="phone"><img src="assets/s2_mw.jpg" alt="Mud Weight and ECD with HPHT correction" loading="lazy" width="600" height="1298"></div><figcaption>Mud Weight &amp; ECD<small>with HPHT density correction</small></figcaption></figure>
+    <figure><div class="phone"><img src="assets/g_rheo.jpg" alt="Rheology results with PV, YP, n, K and Herschel-Bulkley parameters" loading="lazy" width="600" height="1298"></div><figcaption>Rheology<small>PV, YP, n, K, LSYP, Herschel-Bulkley</small></figcaption></figure>
+    <figure><div class="phone"><img src="assets/g_solids.jpg" alt="Solids analysis results with LGS and weight material" loading="lazy" width="600" height="1298"></div><figcaption>Solids Analysis<small>retort, LGS, salt correction</small></figcaption></figure>
+    <figure><div class="phone"><img src="assets/g_hyd.jpg" alt="Hydraulics results with TFA, jet velocity and bit pressure drop" loading="lazy" width="600" height="1298"></div><figcaption>Hydraulics<small>TFA, jet velocity, HHP, impact</small></figcaption></figure>
+    <figure><div class="phone"><img src="assets/s3_hole.jpg" alt="Hole cleaning results in light mode" loading="lazy" width="600" height="1298"></div><figcaption>Hole Cleaning<small>annular velocity, transport ratio</small></figcaption></figure>
+    <figure><div class="phone"><img src="assets/g_kill.jpg" alt="Kill mud weight, ICP, FCP and kick tolerance" loading="lazy" width="600" height="1298"></div><figcaption>Kill Mud<small>KMW, ICP, FCP, kick tolerance</small></figcaption></figure>
+    <figure><div class="phone"><img src="assets/g_cement.jpg" alt="Cement job volumes, sacks and expected returns" loading="lazy" width="600" height="1298"></div><figcaption>Cement Job<small>volumes, sacks, returns</small></figcaption></figure>
+    <figure><div class="phone"><img src="assets/g_schem.jpg" alt="Wellbore schematic with BHA close-up" loading="lazy" width="600" height="1298"></div><figcaption>Wellbore Schematic<small>string, BHA and volumes</small></figcaption></figure>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <h2 class="rv"><em>20</em> calculators</h2>
+  <p class="sec rv">Mud testing, mud building, hydraulics, tripping, well control and cement — in one app.</p>
+  <div class="cats">
+    <div class="card rv"><h3>Mud testing</h3><ul><li>Mud Weight &amp; ECD</li><li>Rheology</li><li>Solids Analysis (retort)</li><li>Filtration / Fluid Loss</li><li>Mud Alkalinity</li><li>Barite Sag Risk</li></ul></div>
+    <div class="card rv d1"><h3>Mud building &amp; treatment</h3><ul><li>Mud Formulation</li><li>Weight Up / Dilution</li><li>Pilot Testing</li></ul>
+      <h3 style="margin-top:18px">Tripping</h3><ul><li>Trip Tank Monitoring</li><li>Swab &amp; Surge Pressure</li></ul>
+      <h3 style="margin-top:18px">Reference</h3><ul><li>Unit Converter</li><li>Technical Reference (PDF, Pro)</li></ul></div>
+    <div class="card rv d2"><h3>Drilling &amp; hydraulics</h3><ul><li>Wellbore Schematic</li><li>Hydraulics</li><li>Hole Cleaning</li><li>Volumes &amp; Strokes</li><li>Well Volume &amp; Losses</li></ul>
+      <h3 style="margin-top:18px">Well control &amp; jobs</h3><ul><li>Kill Mud / Well Control</li><li>LCM Pill Design</li><li>Cement Job</li></ul></div>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <h2 class="rv">Lite or <em>Pro</em></h2>
+  <p class="sec rv">Start free, upgrade when you need the full set.</p>
+  <table class="cmp rv">
+    <thead><tr><th></th><th>Lite</th><th>Pro</th></tr></thead>
+    <tbody>
+      <tr><td>Price</td><td>Free</td><td>One-time purchase, no subscription</td></tr>
+      <tr><td>Calculators</td><td>3 – Mud Weight &amp; ECD, Rheology, Hole Cleaning</td><td class="yes">All 20</td></tr>
+      <tr><td>Technical reference (PDF)</td><td>—</td><td class="yes">40 pages</td></tr>
+      <tr><td>Offline, US + Metric, 10 languages</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+    </tbody>
+  </table>
+  <div class="cta"><a class="btn primary" href="https://play.google.com/store/apps/details?id=com.rigfloortech.mepro">Pro on Google Play</a><a class="btn ghost" href="https://play.google.com/store/apps/details?id=com.rigfloortech.mudengineerlite">Lite on Google Play</a><span class="btn soon">iOS <small>COMING SOON</small></span></div>
+</div></section>
+
+<section id="enterprise" class="ent"><div class="wrap two">
+  <div>
+    <div class="kicker">For companies · PC application</div>
+    <h2 class="rv" style="margin-top:16px">Mud Engineer <em>Enterprise</em></h2>
+    <p class="sec rv" style="margin-bottom:24px">Daily mud operations on your PC. Wells, chemical inventory and selected calculations flow into the Daily Mud Report and the Well Recap — exported to Excel or PDF.</p>
+    <div class="tabs" role="tablist" aria-label="Enterprise features">
+      <button class="tab" role="tab" id="t0" aria-selected="true" aria-controls="v0" type="button"><b>Daily Mud Report</b>Per well and day: depths, remarks, checks and treatments.</button>
+      <button class="tab" role="tab" id="t1" aria-selected="false" aria-controls="v1" type="button"><b>Chemical inventory</b>Stock, low-stock alerts, daily usage and a movement log.</button>
+      <button class="tab" role="tab" id="t2" aria-selected="false" aria-controls="v2" type="button"><b>Well Recap</b>Whole-well summary: products, daily usage and readings over time.</button>
+    </div>
+    <ul class="extras"><li><b>Selected calculations</b> – tick the results that go into the report.</li><li><b>Company name and logo</b> on every Excel and PDF report.</li><li><b>Backup and restore</b> of your well data.</li></ul>
+    <a class="btn primary" href="mailto:mudengineerpro.tech@outlook.de?subject=Mud%20Engineer%20Enterprise">Contact us</a>
+  </div>
+  <div class="rv d1">
+    <div class="win"><div class="bar"><i></i><i></i><i></i><span>Mud Engineer Enterprise</span></div>
+      <div class="view">
+        <figure id="v0" class="on" role="tabpanel" aria-labelledby="t0"><img src="assets/ent_dmr.webp" alt="Daily Mud Report with depths, remarks, calculations and additions" width="720" height="852"></figure>
+        <figure id="v1" role="tabpanel" aria-labelledby="t1"><img src="assets/ent_inv.webp" alt="Chemical Inventory with stock levels and packs" loading="lazy" width="720" height="713"></figure>
+        <figure id="v2" role="tabpanel" aria-labelledby="t2"><img src="assets/ent_recap.jpg" alt="Well Recap report with products added, inventory consumption and daily consumption" loading="lazy" width="820" height="1045"></figure>
+      </div></div>
+    <p class="fine">Screens and report show demo data.</p>
+  </div>
+</div></section>
+
+<section><div class="wrap faq">
+  <h2 class="rv">Questions</h2>
+  <p class="sec rv">Short answers.</p>
+  <details class="rv"><summary>Does it work without internet?</summary><p>Yes. The calculators run on your device and work fully offline. No data leaves your phone.</p></details>
+  <details class="rv"><summary>Is there a subscription?</summary><p>No. Lite is free with 3 calculators. Pro is a one-time purchase that unlocks all 20 calculators and the technical reference.</p></details>
+  <details class="rv"><summary>Which units and languages are supported?</summary><p>US field units and Metric, switched with one tap. English, Arabic, Spanish, Portuguese, French, German, Dutch, Norwegian, Danish and Russian.</p></details>
+  <details class="rv"><summary>Is it available on iPhone?</summary><p>The iOS version is coming soon. For now Mud Engineer Pro and Lite are on Google Play.</p></details>
+  <details class="rv"><summary>Can I rely on the results for critical decisions?</summary><p>The apps are a calculation aid built on standard published formulas, and every formula is documented in the technical reference. Always cross-check against your company procedures, your drilling program and your mud company's reported values.</p></details>
+  <details class="rv"><summary>How do I get Mud Engineer Enterprise?</summary><p>Enterprise is a PC application for companies. <a href="mailto:mudengineerpro.tech@outlook.de?subject=Mud%20Engineer%20Enterprise">Contact us</a> for a demo and licensing.</p></details>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <p class="disc"><strong style="color:var(--cream)">A calculation aid.</strong> The formulas follow standard published practice, but results are a tool, not a substitute for engineering judgement. Always cross-check against your company procedures, your drilling program and your mud company's reported values before making critical decisions.</p>
+</div></section>
+</main>
+
+<div class="sticky" id="sticky"><a class="btn primary" href="https://play.google.com/store/apps/details?id=com.rigfloortech.mepro">Mud Engineer Pro on Google Play</a></div>
+
+<footer><div class="wrap">
+  <div><strong style="color:var(--cream)">Rig Floor Tech</strong><br>© 2026 Rig Floor Tech. All rights reserved.<br>Google Play and the Google Play logo are trademarks of Google LLC.</div>
+  <div><a href="privacy_policy.html">Privacy Policy</a><a href="support.html">Support</a><a href="imprint.html">Imprint</a><br><a href="mailto:mudengineerpro.tech@outlook.de" style="margin-top:6px;display:inline-block">mudengineerpro.tech@outlook.de</a></div>
+</div></footer>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* marquee: the 20 calculators, duplicated for a seamless loop */
+  var names=['Mud Weight & ECD','Rheology','Solids Analysis','Filtration / Fluid Loss','Mud Alkalinity','Barite Sag Risk','Mud Formulation','Weight Up / Dilution','Pilot Testing','Wellbore Schematic','Hydraulics','Hole Cleaning','Volumes & Strokes','Well Volume & Losses','Trip Tank','Swab & Surge','Kill Mud','LCM Pill','Cement Job','Unit Converter'];
+  var tr=$('#track'); if(tr){ var h=''; for(var k=0;k<2;k++) names.forEach(function(n){ h+='<span>'+n.replace(/&/g,'&amp;')+'</span>'; }); tr.innerHTML=h; }
+
+  /* reveal on scroll */
+  var rv=$$('.rv');
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }); },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+    rv.forEach(function(el){ io.observe(el); });
+  } else { rv.forEach(function(el){ el.classList.add('in'); }); }
+
+  /* count-up numbers */
+  var cn=$$('[data-count]');
+  function run(el){ var to=+el.getAttribute('data-count'); if(reduce||to===0){ el.textContent=to; return; } var t0=null; function step(t){ if(!t0) t0=t; var p=Math.min(1,(t-t0)/1100); el.textContent=Math.round(to*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(step);} el.textContent=0; requestAnimationFrame(step); }
+  if('IntersectionObserver' in window){ var io2=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ run(e.target); io2.unobserve(e.target);} }); },{threshold:.6}); cn.forEach(function(el){ io2.observe(el); }); }
+
+  /* live Mud Weight & ECD demo: the state is kept in US field units, the fields only display it */
+  var S={mw:11.8,tvd:9850,afp:170,pp:9.4}, metric=false;
+  var F={ppg:8.345,ft:0.3048,psi:6.894757}; // sg per ppg, m per ft, kPa per psi
+  function fmt(v,d){ if(!isFinite(v)) return '–'; var s=v.toFixed(d); return s.indexOf('.')>=0?s.replace(/0+$/,'').replace(/\.$/,''):s; }
+  function group(v,d){ if(!isFinite(v)) return '–'; return v.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d}); }
+  var el={mw:$('#iMW'),tvd:$('#iTVD'),afp:$('#iAFP'),pp:$('#iPP')};
+  function paint(skip){
+    el.mw.value= skip==='mw'?el.mw.value:(metric?fmt(S.mw/F.ppg,3):fmt(S.mw,2));
+    el.tvd.value=skip==='tvd'?el.tvd.value:(metric?fmt(S.tvd*F.ft,1):fmt(S.tvd,0));
+    el.afp.value=skip==='afp'?el.afp.value:(metric?fmt(S.afp*F.psi,0):fmt(S.afp,0));
+    el.pp.value= skip==='pp'?el.pp.value:(metric?fmt(S.pp/F.ppg,3):fmt(S.pp,2));
+    $('#eMW').textContent=metric?'sg':'ppg'; $('#eTVD').textContent=metric?'m':'ft'; $('#eAFP').textContent=metric?'kPa':'psi'; $('#ePP').textContent=metric?'sg':'ppg';
+    var ok=S.tvd>0&&S.mw>0&&isFinite(S.mw)&&isFinite(S.tvd)&&isFinite(S.afp)&&isFinite(S.pp);
+    var hp=0.052*S.mw*S.tvd, ecd=S.mw+S.afp/(0.052*S.tvd), ob=0.052*(S.mw-S.pp)*S.tvd;
+    function out(id,txt,unit){ var e=$(id); e.innerHTML=ok?txt+'<i>'+unit+'</i>':'–'; e.classList.remove('pulse'); void e.offsetWidth; if(!reduce) e.classList.add('pulse'); }
+    out('#oHP', metric?group(hp*F.psi,0):group(hp,0), metric?'kPa':'psi');
+    out('#oECD',metric?group(ecd/F.ppg,3):group(ecd,2), metric?'sg':'ppg');
+    out('#oOB', metric?group(ob*F.psi,0):group(ob,0), metric?'kPa':'psi');
+  }
+  function read(k){ var v=parseFloat(String(el[k].value).replace(',','.')); if(!isFinite(v)) { S[k]=NaN; return; }
+    if(k==='mw'||k==='pp') S[k]=metric?v*F.ppg:v; else if(k==='tvd') S[k]=metric?v/F.ft:v; else S[k]=metric?v/F.psi:v; }
+  Object.keys(el).forEach(function(k){ el[k].addEventListener('input',function(){ read(k); paint(k); }); });
+  function setUnits(m){ if(m===metric) return; metric=m; $('#uUS').setAttribute('aria-pressed',String(!m)); $('#uSI').setAttribute('aria-pressed',String(m)); Object.keys(S).forEach(function(k){ if(!isFinite(S[k])) S[k]=({mw:11.8,tvd:9850,afp:170,pp:9.4})[k]; }); paint(); }
+  $('#uUS').addEventListener('click',function(){ setUnits(false); }); $('#uSI').addEventListener('click',function(){ setUnits(true); });
+  paint();
+
+  /* screenshot gallery arrows */
+  var g=$('#gal'); function by(d){ g.scrollBy({left:d*(g.clientWidth*0.7),behavior:reduce?'auto':'smooth'}); }
+  $('#gPrev').addEventListener('click',function(){ by(-1); }); $('#gNext').addEventListener('click',function(){ by(1); });
+  g.addEventListener('keydown',function(e){ if(e.key==='ArrowRight'){ by(1); e.preventDefault(); } if(e.key==='ArrowLeft'){ by(-1); e.preventDefault(); } });
+
+  /* enterprise tour (tabs) */
+  var tabs=$$('.tab');
+  function pick(i){ tabs.forEach(function(t,n){ t.setAttribute('aria-selected',String(n===i)); t.setAttribute('tabindex',n===i?'0':'-1'); }); $$('.win figure').forEach(function(f,n){ f.classList.toggle('on',n===i); }); }
+  tabs.forEach(function(t,i){ t.addEventListener('click',function(){ pick(i); }); t.addEventListener('keydown',function(e){ var n=-1; if(e.key==='ArrowDown'||e.key==='ArrowRight') n=(i+1)%tabs.length; if(e.key==='ArrowUp'||e.key==='ArrowLeft') n=(i+tabs.length-1)%tabs.length; if(n>=0){ pick(n); tabs[n].focus(); e.preventDefault(); } }); });
+  pick(0);
+
+  /* sticky store button on phones, once the hero has scrolled away */
+  var st=$('#sticky'); function chk(){ if(st) st.classList.toggle('show',window.scrollY>640); } window.addEventListener('scroll',chk,{passive:true}); chk();
+})();
+</script>
+</body>
+</html>
