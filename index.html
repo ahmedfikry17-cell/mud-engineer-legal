@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mud Engineer – offline mud calculations for the rig floor | Rig Floor Tech</title>
-<meta name="description" content="Mud Engineer Pro and Lite: 20 offline drilling-fluid calculators in field and metric units, with a 40-page technical reference. Mud Engineer Enterprise for companies: Daily Mud Report, chemical inventory and well recap.">
+<title>Mud Engineer – Offline Mud Calculators | Rig Floor Tech</title>
+<meta name="description" content="20 offline drilling-fluid calculators in field and metric units, plus a 40-page technical reference. Pro and Lite on Google Play. Enterprise for companies.">
 <meta name="theme-color" content="#0d1217">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <meta property="og:type" content="website">
@@ -13,6 +13,18 @@
 <meta property="og:image" content="https://ahmedfikry17-cell.github.io/mud-engineer-legal/assets/og.jpg">
 <meta property="og:url" content="https://ahmedfikry17-cell.github.io/mud-engineer-legal/">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ahmedfikry17-cell.github.io/mud-engineer-legal/">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<meta name="color-scheme" content="dark">
+<meta property="og:site_name" content="Rig Floor Tech">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:image:alt" content="Mud Engineer Pro and Lite: offline mud calculators">
+<meta name="twitter:title" content="Mud Engineer – mud calculations in your pocket">
+<meta name="twitter:description" content="20 offline drilling-fluid calculators for the rig floor.">
+<meta name="twitter:image" content="https://ahmedfikry17-cell.github.io/mud-engineer-legal/assets/og.jpg">
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://ahmedfikry17-cell.github.io/mud-engineer-legal/#org", "name": "Rig Floor Tech", "url": "https://ahmedfikry17-cell.github.io/mud-engineer-legal/", "logo": "https://ahmedfikry17-cell.github.io/mud-engineer-legal/assets/icon.png", "email": "mudengineerpro.tech@outlook.de"}, {"@type": "MobileApplication", "name": "Mud Engineer Pro", "operatingSystem": "Android", "applicationCategory": "BusinessApplication", "url": "https://play.google.com/store/apps/details?id=com.rigfloortech.mepro", "description": "20 offline drilling-fluid calculators in field and metric units with a 40-page technical reference.", "publisher": {"@id": "https://ahmedfikry17-cell.github.io/mud-engineer-legal/#org"}}, {"@type": "MobileApplication", "name": "Mud Engineer Lite", "operatingSystem": "Android", "applicationCategory": "BusinessApplication", "url": "https://play.google.com/store/apps/details?id=com.rigfloortech.mudengineerlite", "description": "Free version with 3 offline drilling-fluid calculators.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "publisher": {"@id": "https://ahmedfikry17-cell.github.io/mud-engineer-legal/#org"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does it work without internet?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The calculators run on your device and work fully offline. No data leaves your phone."}}, {"@type": "Question", "name": "Is there a subscription?", "acceptedAnswer": {"@type": "Answer", "text": "No. Lite is free with 3 calculators. Pro is a one-time purchase that unlocks all 20 calculators and the technical reference."}}, {"@type": "Question", "name": "Which units and languages are supported?", "acceptedAnswer": {"@type": "Answer", "text": "US field units and Metric, switched with one tap. English, Arabic, Spanish, Portuguese, French, German, Dutch, Norwegian, Danish and Russian."}}, {"@type": "Question", "name": "Is it available on iPhone?", "acceptedAnswer": {"@type": "Answer", "text": "The iOS version is coming soon. For now Mud Engineer Pro and Lite are on Google Play."}}, {"@type": "Question", "name": "Can I rely on the results for critical decisions?", "acceptedAnswer": {"@type": "Answer", "text": "The apps are a calculation aid built on standard published formulas, and every formula is documented in the technical reference. Always cross-check against your company procedures, your drilling program and your mud company's reported values."}}, {"@type": "Question", "name": "How do I get Mud Engineer Enterprise?", "acceptedAnswer": {"@type": "Answer", "text": "Enterprise is a PC application for companies. Contact us for a demo and licensing."}}]}]}</script>
 <script>document.documentElement.classList.add('js')</script>
 <style>
 :root{--bg:#0d1217;--bg2:#121920;--panel:#161d25;--panel2:#1b242d;--line:#27313b;--amber:#cb820c;--amber-hi:#f0a21a;--amber-2:#d9a83c;--cream:#ece8d8;--sub:#c9c8c1;--muted:#8794a0;--ink:#10151a;--ok:#7fd08a;--r:14px}
@@ -31,7 +43,7 @@ header.top .wrap{display:flex;align-items:center;justify-content:space-between;g
 .brand{display:flex;align-items:center;gap:12px;color:var(--cream);text-decoration:none;font-weight:700}
 .brand img{width:38px;height:38px;border-radius:10px;box-shadow:0 0 0 1px rgba(255,255,255,.06),0 6px 18px rgba(203,130,12,.25)}
 nav{display:flex;align-items:center;gap:6px}
-nav a{color:var(--sub);text-decoration:none;padding:8px 12px;font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:8px}
+nav a{display:inline-flex;align-items:center;min-height:44px;color:var(--sub);text-decoration:none;padding:8px 14px;font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:8px}
 nav a:hover{color:var(--amber-hi);background:rgba(203,130,12,.08)}
 nav a.pill{background:var(--amber);color:var(--ink);margin-left:8px}
 nav a.pill:hover{background:var(--amber-hi);color:var(--ink)}
@@ -182,7 +194,7 @@ details p{margin:0;padding:0 22px 20px}
 /* ---------- footer + sticky cta ---------- */
 footer{border-top:1px solid var(--line);padding:38px 0 60px;font-size:15px;color:var(--muted)}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 40px}
-footer a{margin-right:18px}
+footer a{margin-right:18px;display:inline-block;padding:4px 0}
 .sticky{position:fixed;left:12px;right:12px;bottom:12px;z-index:40;display:none;transform:translateY(140%);transition:transform .3s}
 .sticky.show{transform:none}
 .sticky a{display:flex;justify-content:center;width:100%;box-shadow:0 14px 34px rgba(0,0,0,.55)}
@@ -383,7 +395,7 @@ footer a{margin-right:18px}
 
 <footer><div class="wrap">
   <div><strong style="color:var(--cream)">Rig Floor Tech</strong><br>© 2026 Rig Floor Tech. All rights reserved.<br>Google Play and the Google Play logo are trademarks of Google LLC.</div>
-  <div><a href="privacy_policy.html">Privacy Policy</a><a href="support.html">Support</a><a href="imprint.html">Imprint</a><br><a href="mailto:mudengineerpro.tech@outlook.de" style="margin-top:6px;display:inline-block">mudengineerpro.tech@outlook.de</a></div>
+  <div><a href="privacy_policy.html">Privacy Policy</a><a href="terms_of_use.html">Terms of Use</a><a href="copyright.html">Copyright</a><a href="support.html">Support</a><a href="imprint.html">Imprint</a><br><a href="mailto:mudengineerpro.tech@outlook.de" style="margin-top:6px;display:inline-block">mudengineerpro.tech@outlook.de</a></div>
 </div></footer>
 
 <script>
