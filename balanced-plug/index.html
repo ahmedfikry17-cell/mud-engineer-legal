@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Balanced Cement Plug Calculator – Free | Rig Floor Tech</title>
+<meta name="description" content="Free balanced cement plug calculator: cement volume, top of cement with pipe in hole, spacer heights and displacement volume. Works offline, US and metric units.">
+<style>
+:root{--bg:#1e2024;--card:#2a2d33;--line:#3a3e46;--tx:#eceef1;--mut:#9aa1ab;--gold:#d99a1c;--gold2:#f0b73e;--cem:#9aa3ad;--spc:#4aa3df;--mud:#8a5a34;--bad:#e5645a;--ok:#5cc489}
+@media (prefers-color-scheme:light){:root{--bg:#f4f5f7;--card:#fff;--line:#d9dde3;--tx:#1b1d21;--mut:#5b626c;--gold:#b97800;--gold2:#a56a00;--cem:#8b949e;--spc:#2f86c0;--mud:#9a6a40}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+header.hero{padding:40px 0 24px;border-bottom:1px solid var(--line)}
+.brand{color:var(--gold2);font-weight:700;letter-spacing:.08em;font-size:13px;text-transform:uppercase}
+h1{font-size:clamp(26px,5vw,40px);line-height:1.15;margin:8px 0 10px}
+.lead{color:var(--mut);max-width:640px;margin:0}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.pill{border:1px solid var(--line);border-radius:99px;padding:4px 12px;font-size:13px;color:var(--mut)}
+section{padding:28px 0}
+h2{font-size:22px;margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;align-items:center}
+button,.btn{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--tx);padding:8px 14px;text-decoration:none;display:inline-block}
+button.primary,.btn.primary{background:var(--gold);border-color:var(--gold);color:#16130a;font-weight:700}
+button.on{background:var(--gold);color:#16130a;border-color:var(--gold);font-weight:700}
+.seg{display:inline-flex}.seg button{border-radius:0}.seg button:first-child{border-radius:10px 0 0 10px}.seg button:last-child{border-radius:0 10px 10px 0}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
+fieldset{border:1px solid var(--line);border-radius:12px;margin:0 0 14px;padding:12px}
+legend{color:var(--gold2);font-size:13px;font-weight:700;padding:0 6px;text-transform:uppercase;letter-spacing:.05em}
+label{display:block;font-size:13px;color:var(--mut)}
+label span.u{color:var(--gold2)}
+input{width:100%;margin-top:4px;font:inherit;font-size:16px;color:var(--tx);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 10px}
+input:focus{outline:2px solid var(--gold);border-color:transparent}
+.out{display:grid;gap:10px;grid-template-columns:1fr}
+@media(min-width:720px){.out{grid-template-columns:1.1fr .9fr}}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td,th{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+td.n{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+td small{display:block;color:var(--mut);font-weight:400}
+.key td.n{color:var(--gold2)}
+.msg{border-radius:10px;padding:10px 12px;margin:8px 0;font-size:14px}
+.msg.err{background:rgba(229,100,90,.12);border:1px solid var(--bad);color:var(--bad)}
+.msg.warn{background:rgba(217,154,28,.12);border:1px solid var(--gold);color:var(--gold2)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
+svg{width:100%;height:auto;display:block}
+.steps{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:720px){.steps{grid-template-columns:repeat(2,1fr)}}
+.step b{color:var(--gold2)}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--mut);font-size:13px}
+a{color:var(--gold2)}
+code{background:var(--bg);padding:1px 6px;border-radius:6px;font-size:.92em}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="brand">Rig Floor Tech</div>
+  <h1>Balanced Cement Plug Calculator</h1>
+  <p class="lead">Enter the hole, pipe and plug data. Get cement volume, top of cement with the pipe in the hole, spacer heights, displacement volume and a pumping order. Free, no sign-up, works offline.</p>
+  <div class="pills"><span class="pill">US &amp; metric</span><span class="pill">Works offline</span><span class="pill">Stinger supported</span><span class="pill">Schematic included</span></div>
+</div></header>
+
+<main class="wrap">
+<section id="calc">
+  <h2>Calculator</h2>
+  <div class="card">
+    <div class="toolbar">
+      <div class="seg" role="group" aria-label="Units"><button id="bUS" class="on" type="button">US (ft, in, bbl)</button><button id="bM" type="button">Metric (m, mm, m³)</button></div>
+      <button id="bEx" type="button">Load example</button>
+      <button id="bReset" type="button">Clear</button>
+    </div>
+    <form id="f" onsubmit="return false" autocomplete="off">
+      <fieldset><legend>Hole &amp; plug</legend><div class="grid" id="g1"></div></fieldset>
+      <fieldset><legend>Drill pipe &amp; stinger</legend><div class="grid" id="g2"></div></fieldset>
+      <fieldset><legend>Spacer &amp; displacement</legend><div class="grid" id="g3"></div></fieldset>
+      <fieldset><legend>Optional</legend><div class="grid" id="g4"></div></fieldset>
+    </form>
+  </div>
+
+  <div id="msgs"></div>
+
+  <div class="out" id="res" style="margin-top:14px">
+    <div class="card">
+      <table class="key" id="tbl"></table>
+      <div class="toolbar" style="margin:12px 0 0"><button id="bCopy" class="primary" type="button">Copy summary</button><span id="cpd" style="color:var(--ok);font-size:14px"></span></div>
+    </div>
+    <div class="card">
+      <svg id="svg" viewBox="0 0 430 420" role="img" aria-label="Balanced plug schematic"></svg>
+      <div style="font-size:13px;color:var(--mut);margin-top:6px">
+        <span class="dot" style="background:var(--mud)"></span>Mud
+        <span class="dot" style="background:var(--spc);margin-left:10px"></span>Spacer
+        <span class="dot" style="background:var(--cem);margin-left:10px"></span>Cement
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2 style="font-size:18px">Pumping order</h2>
+    <table id="seq"></table>
+  </div>
+</section>
+
+<section>
+  <h2>How a balanced plug works</h2>
+  <div class="steps">
+    <div class="card step"><b>1. Size the plug.</b> Cement volume = plug length × hole capacity. Capacity (bbl/ft) = ID² ÷ 1029.4.</div>
+    <div class="card step"><b>2. Account for the pipe.</b> With the pipe in the hole the cement column is taller, because the pipe takes up space: height = volume ÷ (annulus capacity + pipe capacity).</div>
+    <div class="card step"><b>3. Balance the levels.</b> Spacer ahead goes up the annulus above the cement. Spacer behind inside the pipe is pumped to the same height, so fluid levels inside and outside the pipe match and the cement does not U-tube.</div>
+    <div class="card step"><b>4. Displace and pull.</b> Mud displacement = pipe capacity from surface to the top of the spacer. Pull slowly above the top of cement, reverse circulate, then pull out. The cement settles to exactly the plug length.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Good practice reminders</h2>
+  <div class="card">
+    <ul style="margin:0;padding-left:20px">
+      <li>Under-displace a little (2–3 bbl is a common guide) to allow for cement falling in the pipe as it is pulled.</li>
+      <li>Check fluid compatibility and use the spacer volumes in your cement programme; the volumes here are inputs, not recommendations.</li>
+      <li>Tag the top of cement after it has set, as per your company procedure.</li>
+      <li>Hole washout, temperature and surface-line volumes are not included. Add them per your programme.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Mud calculations on your phone</h2>
+  <div class="card">
+    <p style="margin-top:0">Mud Engineer Pro has 20 calculators for drilling fluids and related rig operations. Mud Engineer Lite is the free, ad-free version with 3 calculators.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://ahmedfikry17-cell.github.io/mud-engineer-legal/?utm_source=balanced_plug_page&amp;utm_medium=web" rel="noopener">Mud Engineer apps</a>
+      <a class="btn" href="https://apps.apple.com/app/id6819243452" rel="noopener">Pro – App Store</a>
+      <a class="btn" href="https://play.google.com/store/apps/details?id=com.rigfloortech.mepro" rel="noopener">Pro – Google Play</a>
+      <a class="btn" href="https://apps.apple.com/app/id6821364025" rel="noopener">Lite – App Store</a>
+      <a class="btn" href="https://play.google.com/store/apps/details?id=com.rigfloortech.mudengineerlite" rel="noopener">Lite – Google Play</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  Calculation aid only. Results are estimates based on the inputs and a simple geometry model; verify against your cementing programme and company procedures before operations. © Rig Floor Tech.
+</div></footer>
+
+<script>
+(function(){
+var CONV={dia:25.4,dep:0.3048,vol:0.158987294928,yld:0.0283168466,pv:0.158987294928};
+var UN={us:{dia:'in',dep:'ft',vol:'bbl',yld:'ft³/sk',pv:'bbl/stk'},m:{dia:'mm',dep:'m',vol:'m³',yld:'m³/sk',pv:'m³/stk'}};
+var F=[
+['g1','holeID','Hole ID (open hole)','dia',6.25],
+['g1','plugBot','Plug bottom depth','dep',9600],
+['g1','plugLen','Plug length','dep',1000],
+['g2','dpOD','Drill pipe OD','dia',4],
+['g2','dpID','Drill pipe ID','dia',3.35],
+['g2','stLen','Stinger length (0 = none)','dep',1200],
+['g2','stOD','Stinger OD','dia',2.875],
+['g2','stID','Stinger ID','dia',2.441],
+['g3','spAhead','Spacer ahead volume','vol',50],
+['g3','under','Under-displacement','vol',0],
+['g4','shoe','Casing shoe depth','dep',0],
+['g4','csgID','Casing ID above shoe','dia',0],
+['g4','yield','Cement yield','yld',0],
+['g4','pump','Pump output','pv',0]
+];
+var units='us',els={};
+function dec(t){return t==='dia'?(units==='us'?3:1):t==='dep'?(units==='us'?0:1):t==='yld'?(units==='us'?2:4):t==='pv'?4:2}
+function r(x,d){var k=Math.pow(10,d);return Math.round(x*k)/k}
+function build(){
+  F.forEach(function(f){
+    var g=document.getElementById(f[0]);
+    var l=document.createElement('label');l.innerHTML=f[2]+' <span class="u" data-t="'+f[3]+'"></span>';
+    var i=document.createElement('input');i.type='number';i.step='any';i.inputMode='decimal';i.id=f[1];
+    i.addEventListener('input',function(){delete i.dataset.us;run()});l.appendChild(i);g.appendChild(l);els[f[1]]=i;
+  });
+}
+function setUnitsLabel(){
+  [].forEach.call(document.querySelectorAll('.u'),function(s){s.textContent='('+UN[units][s.dataset.t]+')'});
+}
+function fillExample(){
+  F.forEach(function(f){var v=f[4];
+    if(f[1]==='yield')v=1.18; if(f[1]==='pump')v=0.1;
+    els[f[1]].value=r(units==='us'?v:v*CONV[f[3]],dec(f[3]))});
+  run();
+}
+function clearAll(){F.forEach(function(f){els[f[1]].value=''});run()}
+function setUnits(u){
+  if(u===units)return;
+  var old=units;units=u;
+  F.forEach(function(f){var e=els[f[1]];if(e.value==='')return;var v=parseFloat(e.value);if(isNaN(v))return;
+    var us=e.dataset.us?parseFloat(e.dataset.us):(old==='us'?v:v/CONV[f[3]]);
+    if(u==='m')e.dataset.us=us;else delete e.dataset.us;
+    e.value=r(u==='us'?us:us*CONV[f[3]],dec(f[3]))});
+  document.getElementById('bUS').classList.toggle('on',u==='us');
+  document.getElementById('bM').classList.toggle('on',u==='m');
+  setUnitsLabel();run();
+}
+function val(id){var e=els[id].value;var f=F.filter(function(x){return x[1]===id})[0];
+  var v=e===''?0:parseFloat(e);if(isNaN(v))v=0;if(units!=='us'&&els[id].dataset.us)return parseFloat(els[id].dataset.us);return units==='us'?v:v/CONV[f[3]]}
+function toU(x,t){return units==='us'?x:x*CONV[t]}
+function fmt(x,t){return r(toU(x,t),t==='dep'?(units==='us'?0:1):2).toLocaleString('en-US',{minimumFractionDigits:t==='dep'?(units==='us'?0:1):2,maximumFractionDigits:t==='dep'?(units==='us'?0:1):2})+' '+UN[units][t]}
+
+function cap(d){return d*d/1029.4}
+function compute(v){
+  var o={err:[],warn:[]};
+  var H=v.holeID,B=v.plugBot,Lp=v.plugLen,L=v.stLen,stTop=B-L;
+  if(!(H>0))o.err.push('Enter the hole ID.');
+  if(!(B>0))o.err.push('Enter the plug bottom depth.');
+  if(!(Lp>0))o.err.push('Enter the plug length.');
+  if(!(v.dpOD>0&&v.dpID>0))o.err.push('Enter drill pipe OD and ID.');
+  if(Lp>B)o.err.push('Plug length is longer than the plug bottom depth.');
+  if(v.dpID>=v.dpOD)o.err.push('Drill pipe ID must be smaller than OD.');
+  if(L>0&&!(v.stOD>0&&v.stID>0&&v.stID<v.stOD))o.err.push('Stinger OD and ID are required, with ID smaller than OD.');
+  var big=Math.max(v.dpOD,L>0?v.stOD:0);
+  if(H>0&&H<=big)o.err.push('Hole ID must be larger than the pipe OD.');
+  if(L>B)o.err.push('Stinger length is longer than the plug bottom depth.');
+  var useCsg=v.shoe>0&&v.csgID>0;
+  if(useCsg&&v.csgID<=v.dpOD)o.err.push('Casing ID must be larger than the drill pipe OD.');
+  if(v.spAhead<=0&&o.err.length===0)o.warn.push('No spacer ahead entered. A spacer is normally pumped ahead of and behind the cement.');
+  if(o.err.length)return o;
+  var hc=function(z){return useCsg&&z<v.shoe?cap(v.csgID):cap(H)};
+  var odf=function(z){return L>0&&z>=stTop?v.stOD:v.dpOD};
+  var idf=function(z){return L>0&&z>=stTop?v.stID:v.dpID};
+  var A=function(z){return hc(z)-cap(odf(z))};
+  var P=function(z){return cap(idf(z))};
+  var S=0.5;
+  function integ(z1,z2,f){var s=0;for(var z=z1;z<z2;z+=S){var dz=Math.min(S,z2-z);s+=f(z+dz/2)*dz}return s}
+  function walk(z0,vol,f){var z=z0;while(z>0){var dz=Math.min(S,z);var c=f(z-dz/2)*dz;if(c>=vol)return z-vol/f(z-dz/2);vol-=c;z-=dz}return -1}
+  o.Vc=integ(B-Lp,B,hc);
+  o.tocAfter=B-Lp;
+  o.tocPipe=walk(B,o.Vc,function(z){return A(z)+P(z)});
+  o.colPipe=B-o.tocPipe;
+  if(o.tocPipe<=0){o.err.push('Cement column reaches surface. Check the inputs.');return o}
+  o.zs=v.spAhead>0?walk(o.tocPipe,v.spAhead,A):o.tocPipe;
+  if(o.zs<=0){o.err.push('Spacer ahead volume is too large: it would fill the annulus to surface.');return o}
+  o.spBehind=integ(o.zs,o.tocPipe,P);
+  o.mudFull=integ(0,o.zs,P);
+  o.under=v.under;
+  o.mud=o.mudFull-v.under;
+  if(o.mud<=0){o.err.push('Under-displacement is larger than the displacement volume.');return o}
+  if(v.under>0.1*o.mudFull)o.warn.push('Under-displacement is more than 10% of the displacement volume. Check the value.');
+  if(L>0&&o.tocPipe<stTop)o.warn.push('The top of cement with the pipe in the hole is above the stinger top, so the cement column spans both pipe sizes. The calculation handles this, but check that the stinger length is what you intend.');
+  o.sacks=v.yield>0?o.Vc*5.615/v.yield:0;
+  o.pump=v.pump;
+  o.hasSpacer=v.spAhead>0;
+  o.B=B;o.sp=v.spAhead;
+  return o;
+}
+function render(o,v){
+  var msgs=document.getElementById('msgs'),tbl=document.getElementById('tbl'),seq=document.getElementById('seq'),svg=document.getElementById('svg');
+  msgs.innerHTML='';
+  var res=document.getElementById('res');
+  (o.err||[]).forEach(function(m){msgs.innerHTML+='<div class="msg err">'+m+'</div>'});
+  (o.warn||[]).forEach(function(m){msgs.innerHTML+='<div class="msg warn">'+m+'</div>'});
+  if(o.err&&o.err.length){tbl.innerHTML='<tr><td>Fix the inputs above to see results.</td></tr>';seq.innerHTML='';svg.innerHTML='';window._sum='';return}
+  var rows=[
+   ['Cement volume',fmt(o.Vc,'vol'),'plug length × hole capacity'],
+   o.sacks?['Cement sacks',r(o.sacks,0).toLocaleString('en-US')+' sk','at the entered yield']:null,
+   ['Cement column, pipe in hole',fmt(o.colPipe,'dep'),'taller than the plug: pipe takes space'],
+   ['Top of cement, pipe in hole',fmt(o.tocPipe,'dep'),'balance level'],
+   ['Top of spacer (annulus and pipe)',fmt(o.zs,'dep'),'both sides equal'],
+   ['Spacer behind (inside pipe)',fmt(o.spBehind,'vol'),'balances the spacer ahead'],
+   ['Mud displacement',fmt(o.mud,'vol'),o.under>0?'after under-displacing '+fmt(o.under,'vol'):'pipe capacity to top of spacer'],
+   ['Top of cement after pulling',fmt(o.tocAfter,'dep'),'exactly the plug length']
+  ].filter(Boolean);
+  tbl.innerHTML='<tr><th>Result</th><th style="text-align:right">Value</th></tr>'+rows.map(function(x){return '<tr><td>'+x[0]+'<small>'+x[2]+'</small></td><td class="n">'+x[1]+'</td></tr>'}).join('');
+  var steps=[];
+  if(o.hasSpacer)steps.push(['Spacer ahead',o.sp]);
+  steps.push(['Cement',o.Vc]);
+  steps.push(['Spacer behind',o.spBehind]);
+  steps.push(['Mud displacement',o.mud]);
+  var hasP=o.pump>0;
+  seq.innerHTML='<tr><th>#</th><th>Fluid</th><th style="text-align:right">Volume</th>'+(hasP?'<th style="text-align:right">Strokes</th>':'')+'</tr>'+
+   steps.map(function(s,i){return '<tr><td>'+(i+1)+'</td><td>'+s[0]+'</td><td class="n">'+fmt(s[1],'vol')+'</td>'+(hasP?'<td class="n">'+Math.ceil(s[1]/o.pump).toLocaleString('en-US')+'</td>':'')+'</tr>'}).join('');
+  var t='Balanced cement plug ('+(units==='us'?'US':'metric')+')\nPlug: '+fmt(v.plugLen,'dep')+' ending at '+fmt(v.plugBot,'dep')+'\n';
+  rows.forEach(function(x){t+=x[0]+': '+x[1]+'\n'});
+  t+='Pumping order: '+steps.map(function(s){return s[0]+' '+fmt(s[1],'vol')}).join(' > ')+'\nCalculation aid only – rigfloortech balanced plug calculator.';
+  window._sum=t;
+  drawSvg(o,v);
+}
+function drawSvg(o,v){
+  var svg=document.getElementById('svg');
+  var top=30,h=340,max=o.B*1.02;
+  var y=function(d){return top+d/max*h};
+  function col(cx,w,segs,title,pipe){
+    var s='<text x="'+cx+'" y="16" text-anchor="middle" font-size="12" fill="currentColor">'+title+'</text>';
+    segs.forEach(function(sg){s+='<rect x="'+(cx-w/2)+'" y="'+y(sg[0])+'" width="'+w+'" height="'+Math.max(0.5,y(sg[1])-y(sg[0]))+'" fill="'+sg[2]+'"/>'});
+    s+='<rect x="'+(cx-w/2)+'" y="'+top+'" width="'+w+'" height="'+(y(o.B)-top)+'" fill="none" stroke="#7d848d" stroke-width="2"/>';
+    if(pipe){
+      var pw=18;
+      s+='<rect x="'+(cx-pw/2)+'" y="'+top+'" width="'+pw+'" height="'+(y(o.B)-top)+'" fill="none" stroke="#e8edf2" stroke-width="2.5"/>';
+      if(v.stLen>0){var st=y(o.B-v.stLen);s+='<rect x="'+(cx-pw/2-3)+'" y="'+st+'" width="'+(pw+6)+'" height="'+(y(o.B)-st)+'" fill="none" stroke="#e8edf2" stroke-width="1.5" stroke-dasharray="4 3"/>'}
+    }
+    return s;
+  }
+  var mud='var(--mud)',spc='var(--spc)',cem='var(--cem)';
+  var out='';
+  out+=col(135,100,[[0,o.zs,mud],[o.zs,o.tocPipe,spc],[o.tocPipe,o.B,cem]],'Pipe in hole',true);
+  out+=col(300,100,[[0,o.tocAfter,mud],[o.tocAfter,o.B,cem]],'After pulling',false);
+  function lab(x,d,t,side){var L=side==='l';return '<line x1="'+(L?x-4:x+4)+'" x2="'+(L?x-12:x+12)+'" y1="'+y(d)+'" y2="'+y(d)+'" stroke="currentColor"/><text x="'+(L?x-15:x+15)+'" y="'+(y(d)+4)+'" font-size="11" text-anchor="'+(L?'end':'start')+'" fill="currentColor">'+t+'</text>'}
+  out+=lab(85,o.zs,fmt(o.zs,'dep'),'l');
+  out+=lab(85,o.tocPipe,fmt(o.tocPipe,'dep'),'l');
+  out+=lab(85,o.B,fmt(o.B,'dep'),'l');
+  out+=lab(350,o.tocAfter,fmt(o.tocAfter,'dep'),'r');
+  svg.innerHTML=out;
+}
+function run(){
+  var v={};F.forEach(function(f){v[f[1]]=val(f[1])});
+  var o=compute(v);render(o,v);
+}
+build();setUnitsLabel();
+document.getElementById('bUS').onclick=function(){setUnits('us')};
+document.getElementById('bM').onclick=function(){setUnits('m')};
+document.getElementById('bEx').onclick=fillExample;
+document.getElementById('bReset').onclick=clearAll;
+document.getElementById('bCopy').onclick=function(){
+  var t=window._sum||'';if(!t)return;
+  var done=function(){var c=document.getElementById('cpd');c.textContent='Copied';setTimeout(function(){c.textContent=''},1800)};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){fb(t,done)})}else fb(t,done);
+};
+function fb(t,done){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');done()}catch(e){}document.body.removeChild(a)}
+window.__bp={compute:compute};
+fillExample();
+})();
+</script>
+</body>
+</html>
