@@ -106,7 +106,7 @@ code{background:var(--bg);padding:1px 6px;border-radius:6px;font-size:.92em}
 <section>
   <h2>How a balanced plug works</h2>
   <div class="steps">
-    <div class="card step"><b>1. Size the plug.</b> Cement volume = plug length × hole capacity. Capacity (bbl/ft) = ID² ÷ 1029.4.</div>
+    <div class="card step"><b>1. Size the plug.</b> Cement volume = plug length × hole capacity. Capacity (bbl/ft) = ID² ÷ 1029.4, with ID in inches. In metric: capacity (m³/m) = ID² ÷ 1,273,000, with ID in mm.</div>
     <div class="card step"><b>2. Account for the pipe.</b> With the pipe in the hole the cement column is taller, because the pipe takes up space: height = volume ÷ (annulus capacity + pipe capacity).</div>
     <div class="card step"><b>3. Balance the levels.</b> Spacer ahead goes up the annulus above the cement. Spacer behind inside the pipe is pumped to the same height, so fluid levels inside and outside the pipe match and the cement does not U-tube.</div>
     <div class="card step"><b>4. Displace and pull.</b> Mud displacement = pipe capacity from surface to the top of the spacer. Pull slowly above the top of cement, reverse circulate, then pull out. The cement settles to exactly the plug length.</div>
@@ -117,7 +117,7 @@ code{background:var(--bg);padding:1px 6px;border-radius:6px;font-size:.92em}
   <h2>Good practice reminders</h2>
   <div class="card">
     <ul style="margin:0;padding-left:20px">
-      <li>Under-displace a little (2–3 bbl is a common guide) to allow for cement falling in the pipe as it is pulled.</li>
+      <li>Under-displace a little (<span id="tipU">2–3 bbl</span> is a common guide) to allow for cement falling in the pipe as it is pulled.</li>
       <li>Check fluid compatibility and use the spacer volumes in your cement programme; the volumes here are inputs, not recommendations.</li>
       <li>Tag the top of cement after it has set, as per your company procedure.</li>
       <li>Hole washout, temperature and surface-line volumes are not included. Add them per your programme.</li>
@@ -306,6 +306,7 @@ function drawSvg(o,v){
   svg.innerHTML=out;
 }
 function run(){
+  var tu=document.getElementById('tipU');if(tu)tu.textContent=units==='us'?'2–3 bbl':'0.3–0.5 m³';
   var v={};F.forEach(function(f){v[f[1]]=val(f[1])});
   var o=compute(v);render(o,v);
 }
